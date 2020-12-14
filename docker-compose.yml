@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+   db:
+     container_name: db
+     image: mariadb:10.1
+     volumes:
+       - db_data:/var/lib/mysql
+       - ./docker/mysql/conf.d:/etc/mysql/conf.d
+     environment:
+       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+     command: mysqld --general-log=1 --general-log-file=/var/log/mysql/general-log.log
+     ports:
+       - 3306:3306
+volumes:
+    db_data:
